@@ -42,9 +42,7 @@ const post = async <T = null, R = null>(
   body: T,
 ): Promise<R> => _fetch<T, R>(endpoint, "post", body);
 
-export const redirectToLogin = (
-  type: "google" | "twitter" | "discord" | "steam",
-) => {
+export const redirectToLogin = (type: "google" | "discord" | "steam") => {
   window.location.href = `${API_BASE_URL}/auth/${type}`;
 };
 

@@ -56,13 +56,6 @@ export const Dashboard: Component<Props> = (props: Props) => {
             •&nbsp;
             <span
               class="cursor-pointer"
-              onClick={(_) => redirectToLogin("twitter")}
-            >
-              Twitter
-            </span>{" "}
-            •&nbsp;
-            <span
-              class="cursor-pointer"
               onClick={(_) => redirectToLogin("discord")}
             >
               Discord
