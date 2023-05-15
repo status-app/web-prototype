@@ -65,12 +65,19 @@ export const App: Component = () => {
         <ul>
           <li>
             This app is a <b>prototype</b>. It is powered by the&nbsp;
-            <a class="underline" href="https://github.com/status-app/backend">status-app/backend</a> project. Its source
-            is available on <a class="underline" href="https://github.com/status-app/web-prototype">GitHub</a>.
+            <a class="underline" href="https://github.com/status-app/backend">
+              status-app/backend
+            </a>{" "}
+            project. Its source is available on{" "}
+            <a
+              class="underline"
+              href="https://github.com/status-app/web-prototype"
+            >
+              GitHub
+            </a>
+            .
           </li>
-          <li class="-mt-1">
-            (c) statusapp.xyz - 2023
-          </li>
+          <li class="-mt-1">(c) statusapp.xyz - 2023</li>
         </ul>
       </footer>
     </div>

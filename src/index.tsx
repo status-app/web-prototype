@@ -14,6 +14,10 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 }
 
 render(
-  () => <Router><App /></Router>,
+  () => (
+    <Router>
+      <App />
+    </Router>
+  ),
   root as HTMLElement,
 );

@@ -8,11 +8,11 @@ type Props = { items: Accessor<Service[]> };
 export const ServiceList: Component<Props> = (props: Props) => (
   <>
     {props.items().length ? (
-      <For each={props.items()}>
-        {(svc) => <ServiceCard name={svc.name} />}
-      </For>
+      <For each={props.items()}>{(svc) => <ServiceCard name={svc.name} />}</For>
     ) : (
-      <h2 class="text-center italic">nothing to show - try another search...</h2>
+      <h2 class="text-center italic">
+        nothing to show - try another search...
+      </h2>
     )}
   </>
 );

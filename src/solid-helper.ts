@@ -13,15 +13,10 @@ export type APIResource<T, A extends any[]> = {
   fetch: (...args: A) => APIResource<T, A>;
 };
 
-export const apiResource = <
-  T,
-  A extends any[]
->(
+export const apiResource = <T, A extends any[]>(
   fn: (...args: A) => Promise<T>,
 ): APIResource<T, A> => {
-  const [status, setStatus] = createSignal<Status>(
-    null,
-  );
+  const [status, setStatus] = createSignal<Status>(null);
   const [data, setData] = createSignal<T | null>(null);
   const [error, setError] = createSignal<string | null>(null);
 
@@ -41,7 +36,8 @@ export const apiResource = <
             return;
           }
           console.error(
-            "Error while casting when getting api resource from fn", fn.name,
+            "Error while casting when getting api resource from fn",
+            fn.name,
           );
           setError(() => "unknown");
           setStatus(() => "error");
@@ -55,7 +51,7 @@ export const apiResource = <
           }
           setStatus(() => "error");
         });
-      
+
       return ret;
     },
   };

@@ -33,9 +33,9 @@
     "tailwind-fontawesome": "^0.3.2"
   },
   "lint-staged": {
-    "**/*": [
+    "*.{ts,tsx}": [
       "eslint . --fix",
       "prettier --write ."
     ]
   }
-};
+}

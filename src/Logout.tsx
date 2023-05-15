@@ -11,9 +11,13 @@ export const Logout: Component = () => {
     localStorage.removeItem("token");
   })();
 
-  return <div class="text-center text-xl">
-    <div>Processing...</div>
-    {logoutResource.status() === "ok" && <Navigate href="/" /> }
-    {logoutResource.status() === "error" && <div class="text-red-600">An error occured!</div>}
-  </div>;
+  return (
+    <div class="text-center text-xl">
+      <div>Processing...</div>
+      {logoutResource.status() === "ok" && <Navigate href="/" />}
+      {logoutResource.status() === "error" && (
+        <div class="text-red-600">An error occured!</div>
+      )}
+    </div>
+  );
 };

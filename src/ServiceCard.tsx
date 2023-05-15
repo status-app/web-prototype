@@ -7,8 +7,6 @@ export const ServiceCard: Component<Props> = (props: Props) => (
     <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
       {props.name}
     </h5>
-    <p class="mb-3 font-normal text-gray-400 whitespace-nowrap">
-      ...
-    </p>
+    <p class="mb-3 font-normal text-gray-400 whitespace-nowrap">...</p>
   </div>
 );

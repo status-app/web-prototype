@@ -4,7 +4,10 @@ import type { Component, Setter } from "solid-js";
 import type { User } from "./api";
 import type { APIResource } from "./solid-helper";
 
-type Props = { searchSetter: Setter<string>; userResource: APIResource<User, []>; };
+type Props = {
+  searchSetter: Setter<string>;
+  userResource: APIResource<User, []>;
+};
 
 export const Nav: Component<Props> = (props: Props) => (
   <nav class="flex justify-between w-full text-lg">
