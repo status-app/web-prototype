@@ -12,6 +12,15 @@ import { apiResource } from "./solid-helper";
 
 export const App: Component = () => {
   const userResource = apiResource(fetchSelfUser).fetch();
+  createEffect(() => {
+    if (userResource.error() && userResource.error() !== "auth") {
+      console.log("Auth error:", userResource.error());
+      alert(
+        "An unknown error occurred while fetching the backend auth service!\n" +
+          "Check the console for more insights.",
+      );
+    }
+  });
 
   const [search, setSearch] = createSignal<string>(
     localStorage.getItem("search") ?? "",
