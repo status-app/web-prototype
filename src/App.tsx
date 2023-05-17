@@ -9,6 +9,7 @@ import { ServiceList } from "./ServiceList";
 import { Logout } from "./Logout";
 import { Dashboard } from "./Dashboard";
 import { apiResource } from "./solid-helper";
+import { useLocation } from "@solidjs/router";
 
 export const App: Component = () => {
   const userResource = apiResource(fetchSelfUser).fetch();
@@ -54,7 +55,10 @@ export const App: Component = () => {
   return (
     <div class="flex flex-col bg-gray-950 min-h-screen justify-between text-gray-50">
       <header class="sticky top-0 z-50 w-screen text-white bg-slate-800">
-        <Nav searchSetter={setSearch} userResource={userResource} />
+        <Nav
+          searchSetter={useLocation().pathname === "/" ? setSearch : null}
+          userResource={userResource}
+        />
       </header>
       <div class="w-full flex flex-wrap justify-center gap-3 p-4">
         <Routes>

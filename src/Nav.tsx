@@ -5,7 +5,7 @@ import type { User } from "./api";
 import type { APIResource } from "./solid-helper";
 
 type Props = {
-  searchSetter: Setter<string>;
+  searchSetter: Setter<string> | null;
   userResource: APIResource<User, []>;
 };
 
@@ -17,22 +17,24 @@ export const Nav: Component<Props> = (props: Props) => (
         <span class="hidden sm:inline">statusapp.xyz</span>
         <span class="sm:hidden">statusapp</span>
       </A>
-      <div class="hidden md:flex px-4 absolute left-1/2 -translate-x-1/2 text-slate-500">
-        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-          <span class="px-5 icon-before icon-solid icon-magnifying-glass"></span>
-        </span>
-        <input
-          class="invalid:w-32 invalid:text-slate-500 text-white border-2 border-gray-600 bg-gray-800 py-1 rounded-md pl-10 pr-2 focus:outline-none hover:w-80 focus:w-80 w-80 transition-width"
-          maxLength="24"
-          required
-          type="text"
-          onInput={(ev) => {
-            props.searchSetter((ev.target as HTMLInputElement).value || "");
-          }}
-          placeholder="search..."
-          value={localStorage.getItem("search") ?? ""}
-        ></input>
-      </div>
+      {props.searchSetter && (
+        <div class="hidden md:flex px-4 absolute left-1/2 -translate-x-1/2 text-slate-500">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+            <span class="px-5 icon-before icon-solid icon-magnifying-glass"></span>
+          </span>
+          <input
+            class="invalid:w-32 invalid:text-slate-500 text-white border-2 border-gray-600 bg-gray-800 py-1 rounded-md pl-10 pr-2 focus:outline-none hover:w-80 focus:w-80 w-80 transition-width"
+            maxLength="24"
+            required
+            type="text"
+            onInput={(ev) => {
+              props.searchSetter!((ev.target as HTMLInputElement).value || "");
+            }}
+            placeholder="search..."
+            value={localStorage.getItem("search") ?? ""}
+          ></input>
+        </div>
+      )}
       <div class="flex items-center ml-auto children:ml-3">
         {/* <a class="flex items-center hover:text-gray-200 icon-before icon-solid icon-right-to-bracket icon-space-sm" href="#">
         log in
