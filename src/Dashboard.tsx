@@ -128,7 +128,7 @@ export const Dashboard: Component<Props> = (props: Props) => {
           </form>
         </div>
       ) : (
-        <ServiceList items={props.items} />
+        <ServiceList items={props.items} showTools={true} />
       )}
     </>
   );

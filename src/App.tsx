@@ -56,7 +56,11 @@ export const App: Component = () => {
     <div class="flex flex-col bg-gray-950 min-h-screen justify-between text-gray-50">
       <header class="sticky top-0 z-50 w-screen text-white bg-slate-800">
         <Nav
-          searchSetter={useLocation().pathname === "/" ? setSearch : null}
+          searchSetter={
+            useLocation().pathname === "/" || userResource.val()
+              ? setSearch
+              : null
+          }
           userResource={userResource}
         />
       </header>
