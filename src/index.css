@@ -21,7 +21,8 @@ input {
   background-color: #131516;
 }
 
-.dialog input, .dialog textarea {
+.dialog input,
+.dialog textarea {
   background-color: white;
   border: 1px solid black;
 }
@@ -29,7 +30,6 @@ input {
 .tooltip-text {
   opacity: 0;
 }
-
 
 .tooltip:hover .tooltip-text {
   opacity: 100;
