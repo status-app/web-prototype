@@ -25,6 +25,14 @@ export const Dashboard: Component<Props> = (props: Props) => {
     return;
   }
 
+  const error: string | undefined = searchParams["error"];
+  if (error) {
+    // Clean error from URL without reloading
+    const url = new URL(location.href);
+    url.searchParams.delete("error");
+    history.replaceState({}, document.title, url.toString());
+  }
+
   const newUserResource = apiResource(_basicLogin);
 
   // const [status, setStatus] = createSignal<null | "pending" | "ok" | "error">(null);
@@ -55,9 +63,9 @@ export const Dashboard: Component<Props> = (props: Props) => {
               class="cursor-pointer"
               onClick={(_) => redirectToLogin("google")}
             >
-              Google
-            </span>{" "}
-            •&nbsp;
+              use Google
+            </span>
+            {/*•&nbsp;
             <span
               class="cursor-pointer"
               onClick={(_) => redirectToLogin("discord")}
@@ -70,7 +78,36 @@ export const Dashboard: Component<Props> = (props: Props) => {
               onClick={(_) => redirectToLogin("steam")}
             >
               Steam
-            </span>
+            </span>*/}
+
+            {
+              /* Back-end error */ error && (
+                <>
+                  <hr class="mt-1" />
+                  <span class="text-red-500">{error}</span>
+                </>
+              )
+            }
+            {newUserResource.status() === "error" && (
+              <>
+                <hr class="mt-1" />
+                <span class="text-red-500">
+                  Error: {newUserResource.error()}
+                </span>
+              </>
+            )}
+            {newUserResource.status() === "fetching" && (
+              <>
+                <hr class="mt-1" />
+                <span class="text-orange-500">Processing...</span>
+              </>
+            )}
+            {newUserResource.status() === "ok" && (
+              <>
+                <hr class="mt-1" />
+                <span class="text-green-500">Processing...</span>
+              </>
+            )}
           </div>
           <hr class="mt-1" />
           {newUserResource.status() === "error" && (
