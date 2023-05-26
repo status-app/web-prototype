@@ -4,6 +4,7 @@ import { on, createEffect, createSignal } from "solid-js";
 import { Nav } from "./Nav";
 import { Route, Routes } from "@solidjs/router";
 import type { Service } from "./api";
+import { getServices } from "./api";
 import { fetchSelfUser } from "./api";
 import { ServiceList } from "./ServiceList";
 import { Logout } from "./Logout";
@@ -26,31 +27,43 @@ export const App: Component = () => {
   const [search, setSearch] = createSignal<string>(
     localStorage.getItem("search") ?? "",
   );
+
   const [items, setItems] = createSignal<Service[]>([]);
+
   const [filteredItems, setFilteredItems] = createSignal<Service[]>([]);
 
-  createEffect(
-    on(search, (_input, prevInput) => {
-      localStorage.setItem("search", _input);
-      const input = _input.toLowerCase();
-      if (input === prevInput?.toLowerCase()) return;
-      setFilteredItems(
-        input
-          ? items().filter(
-              (svc) =>
-                svc.name.toLowerCase().includes(input) ||
-                svc.desc?.toLowerCase().includes(input),
-            )
-          : items(),
-      );
-    }),
-  );
+  const x = (_input: string, _prevInput: string) => {
+    localStorage.setItem("search", _input);
+    const input = _input.toLowerCase();
+    setFilteredItems(
+      input
+        ? items().filter(
+            (svc) =>
+              svc.name.toLowerCase().includes(input) ||
+              svc.description?.toLowerCase().includes(input),
+          )
+        : items(),
+    );
+  };
 
-  setItems(
-    [...Array(213).keys()].map(
-      (i) => ({ name: `Service ${i + 1}` } as Service),
-    ),
-  ); // TODO
+  createEffect(on(search, (_input, prevInput) => x(_input, prevInput)));
+
+  createEffect(on(items, () => x(search(), search())));
+
+  const servicesRes = apiResource(getServices).fetch();
+  createEffect(() => {
+    if (servicesRes.error()) {
+      console.log(servicesRes.error());
+      alert(
+        "An error occurred while fetching services!\n" +
+          "Check the console for more insights.",
+      );
+    }
+
+    if (servicesRes.loaded()) {
+      setItems(() => servicesRes.val()!);
+    }
+  });
 
   return (
     <div class="flex flex-col bg-gray-950 min-h-screen justify-between text-gray-50">

@@ -20,3 +20,18 @@ code {
 input {
   background-color: #131516;
 }
+
+.dialog input, .dialog textarea {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.tooltip-text {
+  opacity: 0;
+}
+
+
+.tooltip:hover .tooltip-text {
+  opacity: 100;
+  visibility: visible;
+}

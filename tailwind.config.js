@@ -3,6 +3,18 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  safelist: [
+    {
+      // Text Color
+      pattern: /^text-.+$/,
+      // variants: ["dark", "hover", "focus", "focus-visible", "group-hover"],
+    },
+    {
+      // Backgrounds
+      pattern: /^bg-.+$/,
+      variants: ["dark", "hover", "focus", "focus-visible", "group-hover"],
+    },
+  ],
   theme: {
     extend: {
       transitionProperty: {
